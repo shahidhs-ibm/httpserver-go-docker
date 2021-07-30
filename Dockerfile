@@ -1,5 +1,6 @@
 # build stage
-FROM golang as builder
+#FROM golang as builder
+FROM golang:1.13.13-alpine3.11 as builder
 
 ENV GO111MODULE=on
 
