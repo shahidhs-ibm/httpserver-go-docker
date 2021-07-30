@@ -1,5 +1,8 @@
 # build stage
-FROM golang as builder
+FROM --platform=$BUILDPLATFORM golang as builder
+
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
 
 ENV GO111MODULE=on
 
@@ -12,7 +15,7 @@ RUN go mod download
 
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETPLATFORM go build
 
 # final stage
 FROM scratch
